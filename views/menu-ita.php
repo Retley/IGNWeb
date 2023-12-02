@@ -1,35 +1,22 @@
+<?php session_start() ?>
+<?php require("dir.php"); ?>
 <!DOCTYPE html>
 <html lang="es">
-
-<?php require("dir.php") ?>
 
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>BucaZona</title>
-  <link rel="icon" href="<?php echo $STATIC?>\silverware-png.ico" type="image/x-icon">
-  <link rel="stylesheet" href="<?php echo $STATIC?>\style.css ">
+  <link rel="icon" href="<?php echo $STATIC ?>\silverware-png.ico" type="image/x-icon">
+  <link rel="stylesheet" href="<?php echo $STATIC ?>\style.css ">
 </head>
 
 <body>
 
-  <header>
-    <div class="logo">
-      <img src="<?php echo $STATIC?>\Logo-Rest.png" alt="Banner del restaurante">
-      <h1>BucaZona</h1>
-      <a href="filter.html" class="filter-button">Herramienta de Filtrado</a>
-    </div>
-    <div>
-      <a href="perfil.html" style="display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; color: white; text-decoration: none;">
-        <img src="<?php echo $STATIC?>\Perfil.png" alt="ícono de perfil" class="profile-icon" style="margin: 0;">
-        <p>Perfil</p>
-
-      </a>
-    </div>
-  </header>
+  <?php require("header.php") ?>
 
   <div class="restaurant-page">
-    <img src="<?php echo $STATIC?>\lasagna.jpg" alt="Restaurante 1">
+    <img src="<?php echo $STATIC ?>\lasagna.jpg" alt="Restaurante 1">
     <div class="restaurant-info">
       <h3>Ristorante Buona Tavola</h3>
       <p>"Ristorante Buona Tavola" es una joya culinaria que rinde homenaje a la tradición gastronómica italiana. Con
@@ -41,7 +28,7 @@
         fusionan para crear una experiencia verdaderamente inolvidable.</p>
       <p>Puntuación: ★★★★★</p>
       <p>Precio: $$$</p>
-      <a href="reserva.html" class="reserva">Reservar</a>
+      <a href="<?php if(logged_in()) echo "/ing-web/book"; else echo "/ing-web/login"; ?>" class="reserva">Reservar</a> 
     </div>
   </div>
 
@@ -72,24 +59,7 @@
     </div>
   </div>
 
-  <footer>
-    <div class="footer-logo">
-      <img src="<?php echo $STATIC?>\Logo-Rest.png" alt="Banner del inicio">
-    </div>
-    <div class="contact-icons">
-      <a href="tel:12345"><img src="<?php echo $STATIC?>\phone.png" alt="Teléfono"></a>
-      <a href="mailto:info@restaurantexyz.com"><img src="<?php echo $STATIC?>\email.png" alt="Correo Electrónico"></a>
-      <a href="https://www.facebook.com/restaurantexyz"><img src="<?php echo $STATIC?>\Facebook.png" alt="Facebook"></a>
-    </div>
-    <p>Derechos de Autor © 2023 BucaZona. Todos los derechos reservados. El contenido de este sitio web, incluyendo,
-      pero no
-      limitado a, texto, gráficos, logotipos, imágenes, archivos de audio y video, y software, es propiedad de BucaZona
-      y
-      está protegido por las leyes de derechos de autor de Panamá. Ningún contenido de este sitio web puede ser copiado,
-      reproducido, modificado, distribuido, transmitido, republicado, exhibido o vendido sin el consentimiento previo
-      por
-      escrito de BucaZona.</p>
-  </footer>
+  <?php require("footer.php") ?>
 
 </body>
 

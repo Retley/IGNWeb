@@ -1,5 +1,4 @@
 <?php session_start() ?>
-
 <?php
 
 require_once("dir.php");
@@ -26,11 +25,11 @@ $rest = new Restaurant(connect());
 
   <section class="restaurant-list">
 
-    <h2>Recomendados del Mes</h2>
+    <h2>Resultados del filtro</h2>
 
     <?php
 
-    $rest_list = $rest->get_all_restaurants();
+    $rest_list = $rest->filter_restaurants($_POST["cuisine"], $_POST["price"]);
 
     foreach ($rest_list as $restaurant) {
       echo "<div class=\"rest-bloque\">\n
@@ -38,8 +37,8 @@ $rest = new Restaurant(connect());
             \t<div class=\"restaurant-info\">\n
             \t\t<h3>$restaurant[nombre]</h3>\n
             \t\t<p>$restaurant[descripcion]</p>\n
-            \t\t<p>Puntuación:" . num_to_star($restaurant["punt"]) . "</p>\n
-            \t\t<p>Precio: " . num_to_price($restaurant["precio"]) . "</p>\n
+            \t\t<p>Puntuación: " . num_to_star($restaurant["punt"]) . "</p>\n
+            \t\t<p>Precio: " . num_to_price($restaurant["precio"]) . " </p>\n
             \t\t<a href=\"$ROOT\\restaurants\\$restaurant[id]\">Ver Restaurante</a>\n
             \t</div>\n
       </div>\n";

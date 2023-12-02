@@ -1,21 +1,19 @@
+<?php session_start() ?>
+<?php require("dir.php"); ?>
 <!DOCTYPE html>
 <html lang="es">
-<?php
 
-require_once("dir.php");
-
-?>
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>BucaZona - Inicio de Sesión</title>
-  <link rel="icon" href="<?php echo $STATIC?>\silverware-png.ico" type="image/x-icon">
-  <link rel="stylesheet" href="<?php echo $STATIC?>\style.css">
+  <link rel="icon" href="<?php echo $STATIC ?>\silverware-png.ico" type="image/x-icon">
+  <link rel="stylesheet" href="<?php echo $STATIC ?>\style.css">
 </head>
 
 <body>
 
-    <header><?php require("header.html"); ?></header>
+  <?php require("header.php") ?>
 
   <div class="login-register">
     <div class="login-register-box">
@@ -27,13 +25,13 @@ require_once("dir.php");
         <label for="password">Contraseña:</label>
         <input type="password" id="password" name="password" placeholder="Tu contraseña" required>
 
-        <button type="submit">Login</button>
-        <a href="register.html">Register</a>
+        <input class="submit" type="submit" name="login" value="Log in">
+        <a href="/ing-web/signup">Register</a>
       </form>
     </div>
   </div>
 
-  <footer><?php require("footer.html"); ?></footer>
+  <?php require("footer.php") ?>
 
 </body>
 

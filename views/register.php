@@ -1,22 +1,19 @@
+<?php session_start() ?>
+<?php require("dir.php"); ?>
 <!DOCTYPE html>
 <html lang="es">
-<?php
-
-require_once("dir.php");
-
-?>
 
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>BucaZona - Registro</title>
-  <link rel="icon" href="<?php echo $STATIC?>\silverware-png.ico" type="image/x-icon">
-  <link rel="stylesheet" href="<?php echo $STATIC?>\style.css">
+  <link rel="icon" href="<?php echo $STATIC ?>\silverware-png.ico" type="image/x-icon">
+  <link rel="stylesheet" href="<?php echo $STATIC ?>\style.css">
 </head>
 
 <body>
 
-<header><?php require("header.html"); ?></header>
+  <?php require("header.php") ?>
 
   <div class="registration">
     <div class="registration-box">
@@ -42,13 +39,13 @@ require_once("dir.php");
           <label for="password">Contraseña:</label>
           <input type="password" class="user-control" id="password" name="password" placeholder="Elige una contraseña segura" required>
         </div>
-        <button name="submit" type="submit">Registrarse</button>
+        <input class="submit" type="submit" name="signup" value="Sign Up" style="margin: 0;">
       </form>
     </div>
   </div>
 
 
-  <footer><?php require("footer.html"); ?></footer>
+  <?php require("footer.php") ?>
 
 </body>
 
