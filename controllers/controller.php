@@ -1,6 +1,6 @@
 <?php
-
 require_once("connection.php");
+require_once("models/bookings.php");
 require_once("models/restaurants.php");
 require_once("models/users.php");
 
@@ -26,24 +26,64 @@ class Controller{
 
     function login(){
         require("views/login.php");
-        if (isset($_POST["submit"])){
+        if (isset($_POST["login"])){
             $user_model = new User(connect());
-            $user_model -> get_user($_POST["username"], $_POST["password"]);
+            $user = $user_model -> get_user($_POST["username"], $_POST["password"]);
+            if($user){
+                $_SESSION["userid"] = $user["id"];
+                $_SESSION["username"] = $user["user"];
+                echo "<script>window.location.href=\"/ing-web/\";</script>";
+
+            } else echo "Este usuario no existe!";
         }
+
     }
 
     function signup(){
         require("views/register.php");
-        if (isset($_POST["submit"])){
+        if (isset($_POST["signup"])){
             $user_model = new User(connect());
             $user_model -> create_user($_POST["name"], $_POST["email"], $_POST["phone"], $_POST["username"], $_POST["password"]);
             if(!$user_model){
                 echo "El usuario no pudo ser creado!";
             }
-            header("Location: /ing-web/login");
-            die(0);
+            echo "<script>window.location.href=\"/ing-web/login\";</script>";
         }
     }
+
+    function filter(){
+        require("views/filter.php");
+    }
+
+    function signout(){
+        session_start();
+        
+        if(isset($_POST["signout"])){
+            session_destroy();
+        }
+        echo "<script>window.location.href=\"/ing-web/\";</script>";
+    }
+
+    function book(){
+        require("views/reserva.php");
+        if(isset($_POST["book"])){
+            $booking_model = new Booking(connect());
+            $datetime = new DateTime($_POST["date"] ." ". $_POST["time"]);
+            $now = new DateTime();
+            if ($now < $datetime) {
+                $booking_model -> create_booking($_SESSION["userid"], $_POST["restaurant"], $_POST["date"], $_POST["time"], $_POST["guests"], $_POST["comments"]);
+                echo "<script>window.location.href=\"/ing-web/\";</script>";
+            } else {
+                throw new Error("No se puede realizar reservas en el pasado!");       
+            }
+
+        }
+    }
+
+    function not_found(){
+        require("views/foundn't.php");
+    }
+
 }
 
 ?>

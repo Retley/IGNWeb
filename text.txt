@@ -1,0 +1,6 @@
+        <a href=\"perfil.html\" style=\"display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; color: white; text-decoration: none;\">
+            <img src=\"static\Perfil.png\" alt=\"ícono de perfil\" class=\"profile-icon\" style=\"margin: 0;\">
+            <p>Perfil</p>
+        </a>
+
+        

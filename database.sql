@@ -4,11 +4,12 @@ CREATE TABLE restaurantes(
     descripcion TEXT,
     punt TINYINT,
     precio TINYINT,
+    tipo NVARCHAR(64),
     file_url VARCHAR(128),
-    image_url VARCHAR(128),
+    image_url VARCHAR(128) DEFAULT 'static/default.png',
         CONSTRAINT check_punt CHECK(punt BETWEEN 0 AND 10),
         CONSTRAINT checlk_precio CHECK(precio BETWEEN 1 AND 3)
-    );
+);
 
 CREATE TABLE usuarios(
     id BIGINT PRIMARY KEY AUTO_INCREMENT,
@@ -19,30 +20,36 @@ CREATE TABLE usuarios(
     pass VARCHAR(24)
 );
 
-INSERT INTO
-    restaurantes (
-        nombre,
-        descripcion,
-        punt,
-        precio,
-        file_url,
-        image_url
-    )
-VALUES
-(
-        'Ristorante Buona Tavola',
-        '"Ristorante Buona Tavola" es una joya culinaria que rinde homenaje a la tradición gastronómica italiana. Con
-        raíces en la región de la Toscana, nuestro restaurante combina la pasión por la cocina auténtica con
-        ingredientes frescos y locales. Nuestra carta presenta una amplia variedad de pastas frescas hechas a mano,
-        desde ravioles rellenos de ricotta y espinacas hasta tagliatelle con salsa de trufa. Nuestro horno de leña
-        produce las pizzas más deliciosas, con una base fina y crujiente y una selección de ingredientes de alta
-        calidad. El "Ristorante Buona Tavola" es un lugar donde la comida, el vino y la hospitalidad italiana se
-        fusionan para crear una experiencia verdaderamente inolvidable.',
-        10,
-        3,
-        'views/menu-ita.php',
-        'static/shrimps.jpg'
+CREATE TABLE reservas(
+    id_reserva BIGINT AUTO_INCREMENT,
+    id_usuario BIGINT,
+    id_restaurante BIGINT,
+    fecha DATE,
+    hora TIME,
+    invitados TINYINT,
+    comentarios TEXT,
+        CONSTRAINT reservas_pk PRIMARY KEY (id_reserva, id_usuario, id_restaurante),
+        CONSTRAINT reservas_usuarios_fk FOREIGN KEY(id_usuario) REFERENCES usuarios(id),
+        CONSTRAINT reservas_restaurantes_fk FOREIGN KEY(id_restaurante) REFERENCES restaurantes(id)
+);
+
+
+
+INSERT INTO restaurantes (nombre, descripcion, punt, precio, file_url, image_url) VALUES (
+    'Ristorante Buona Tavola',
+    '"Ristorante Buona Tavola" es una joya culinaria que rinde homenaje a la tradición gastronómica italiana. Con
+    raíces en la región de la Toscana, nuestro restaurante combina la pasión por la cocina auténtica con
+    ingredientes frescos y locales. Nuestra carta presenta una amplia variedad de pastas frescas hechas a mano,
+    desde ravioles rellenos de ricotta y espinacas hasta tagliatelle con salsa de trufa. Nuestro horno de leña
+    produce las pizzas más deliciosas, con una base fina y crujiente y una selección de ingredientes de alta
+    calidad. El "Ristorante Buona Tavola" es un lugar donde la comida, el vino y la hospitalidad italiana se
+    fusionan para crear una experiencia verdaderamente inolvidable.',
+    10,
+    3,
+    'views/menu-ita.php',
+    'static/shrimps.jpg'
     );
+
 
 INSERT INTO
     restaurantes (
@@ -140,3 +147,9 @@ VALUES
         'views/menu-mar.php',
         'static/shrimps.jpg'
     );
+
+UPDATE restaurantes SET tipo = 'italiana' WHERE ID = 1;
+UPDATE restaurantes SET tipo = 'japonesa' WHERE ID = 2;
+UPDATE restaurantes SET tipo = 'mexicana' WHERE ID = 3;
+UPDATE restaurantes SET tipo = 'comida rápida' WHERE ID = 4;
+UPDATE restaurantes SET tipo = 'mariscos' WHERE ID = 5;

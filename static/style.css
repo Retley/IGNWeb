@@ -1,5 +1,6 @@
 * {
   box-sizing: border-box;
+  font-family: 'Segoe UI', 'Helvetica Neue', arial, sans-serif; 
 }
 
 body {
@@ -45,7 +46,6 @@ header img {
   margin-top: 10px;
   width: 100%;
 }
-
 
 .logo {
   display: flex;
@@ -154,6 +154,13 @@ button {
   color: #ffffff;
   padding: 10px;
   border: none;
+}
+
+.submit{
+  background-color: #46409c;
+  color: white;
+  border: none;
+  padding: 0.75em;
 }
 
 .login-register {

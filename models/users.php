@@ -12,7 +12,7 @@ class User{
     function create_user($full_name, $email, $phone, $user, $pass){
         $st = $this -> conn -> prepare ("SELECT * FROM USUARIOS WHERE USER = ? OR EMAIL = ?");
         $st ->bind_param("ss",  $user, $email);
-        $st->execute(); // You were missing this line
+        $st -> execute();
         $result = $st->get_result();
         if ($result -> num_rows > 0){
             echo "ese usuario ya existe!";
@@ -22,7 +22,7 @@ class User{
         $cr -> bind_param("sssss", $full_name, $email, $phone,  $user, $pass);
         $cr->execute();
         
-        return($st -> affected_rows > 0);
+        return($cr -> affected_rows > 0);
     }
 
     function get_user(string $user, string $pass){

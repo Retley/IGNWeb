@@ -25,6 +25,26 @@ class Restaurant{
         return $result->fetch_assoc(); //convierte el objeto resultado a un arreglo asociativo utilizable
     }
 
+    function filter_restaurants(string $type, string $price){
+        
+        $query = "SELECT * FROM RESTAURANTES";
+        if($type && $price){
+            $query .= " WHERE tipo = '$type' AND precio = $price";  
+        } elseif($type){
+            $query .= " WHERE tipo = '$type'";
+        } elseif($price){
+            $query .= " WHERE precio = $price";
+        }
+        $result = $this->conn->execute_query($query);
+
+        $restaurants = [];
+        while ($row = $result->fetch_assoc()) {
+            $restaurants[] = $row;
+        }
+    
+        return $restaurants;
+    }
+
 
 }
 

@@ -28,6 +28,7 @@ elseif($req == "/signout"){
 elseif($req == "/book"){
     $controller -> book();
 } else{
+    http_response_code(404);
     $controller -> not_found();
 }
 
